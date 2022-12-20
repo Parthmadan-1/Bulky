@@ -9,4 +9,10 @@ Pro: Fully monitor email delivery. No matter what happens to your email after yo
 Pro: Your email list is private. Another advantage of running your own SMTP is that you don’t have to share email list information with anyone, maintaining your company’s and your customer’s data privacy.
 
 
+When we say unlimited emails, this means that we can send unlimited emails from our server, there are no restrictions by companies or monthly plans to buy or so.
+
+It's your own server, u can send as much your server can handle in terms of resources. so when you have more (CPU and RAM), you can send more emails and so on.
+
+
+
 
