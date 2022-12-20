@@ -98,4 +98,73 @@ docker run -d \
 This will install your postal database on MariaDB.
 
 
+### RabbitMQ
+RabbitMQ is responsible for dispatching messages between different processes. As with MariaDB, there are numerous ways for you to install this. For this guide, we're just going to run a single RabbitMQ worker. Copy all the below as one command and paste on putty.
+```
+docker run -d \
+   --name postal-rabbitmq \
+   -p 127.0.0.1:5672:5672 \
+   --restart always \
+   -e RABBITMQ_DEFAULT_USER=postal \
+   -e RABBITMQ_DEFAULT_PASS=postal \
+   -e RABBITMQ_DEFAULT_VHOST=postal \
+   rabbitmq:3.8
+```
+
+
+### Installation
+Run the command below and replace postal.yourdomain.com with the actual hostname you want to access your Postal web interface at. Make sure you have set up this domain with your DNS provider before continuing.
+
+`postal bootstrap postal.YOURDOMAIN.COM`
+
+### Initializing the database
+Run the following commands to create the schema and then create your first admin user.
+```
+postal initialize
+postal make-user
+```
+
+### Running postal
+You're now ready to run Postal. You can do this by running:
+
+`postal start`
+This will run a number of containers on your machine. You can use `postal status` to see details of these components.
+
+
+### Installing WEB Client
+You can use any web client to run postal on your web, but in this guide, we are going to use Caddy. Install it with an SSL using below command.
+```
+docker run -d \
+   --name postal-caddy \
+   --restart always \
+   --network host \
+   -v /opt/postal/config/Caddyfile:/etc/caddy/Caddyfile \
+   -v /opt/postal/caddy-data:/data \
+   caddy
+  ```
+Once this has started, Caddy will issue an SSL certificate for your domain and you'll be able to immediately access the Postal web interface and login with the user you created in one of the previous steps.
+
+### Configure Postal SMTP
+Now, Open your Internet browser, and navigate to your Server IP URL or Subdomain like this:
+
+`https://YOUR_SERVR_ADDRESS`
+
+And then the Postal Login Screen will open, enter your email and password that you created during the setup to login.
+Postal Login
+And Now, you are inside Postal, click “Add Organization” to add one.
+
+Then Click on Build Mail Server and enter the name, and set it to live mode
+
+### Postal Domain Configuration
+Now, Click On Domains to add you domain name into Postal.
+Add Domain in Postal
+Enter your Domain name that you want to use to send emails, and Click Create Domain.
+
+Then, Postal will show you the Domain page with the records that you need to configure.
+So, What you need to do simply, is to copy these records and paste in your DNS Zone. and then your server will be ready to send emails!
+
+
+
+
+
 
