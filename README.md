@@ -51,7 +51,7 @@ The VPS is ready, and we can start the installation process. So in order to setu
 
 ### Install Postal Free SMTP Software
 #### Prerequisites
-Postal runs entirely using containers which means to run Postal you'll need some software to run these containers. We recommend using Docker for this purpose but you can use whatever software you wish.
+Postal runs entirely using containers which means to run Postal you'll need some software to run these containers. I recommend using Docker for this purpose but you can use whatever software you wish.
 
 To install docker, run below commands. (NOTE: Each command starts with a – )
 ```
@@ -72,4 +72,30 @@ To install docker, run below commands. (NOTE: Each command starts with a – )
 -sudo chmod +x /usr/local/bin/docker-compose
 -docker-compose --version
 ```
+#### System utilties
+There are a few system utilities that you need to have installed before you'll be able to run some of the Postal commands.
+
+`apt install git curl jq`
+
+#### Git & installation helper repository
+Make sure you have git installed on the server by running below commands.
+```
+-git clone https://postalserver.io/start/install /opt/postal/install
+-sudo ln -s /opt/postal/install/bin/postal /usr/bin/postal
+```
+
+#### Maria DB
+You can run MariaDB in a container, assuming you have Docker, using this command. Copy and paste this all in Putty.
+```
+docker run -d \
+   --name postal-mariadb \
+   -p 127.0.0.1:3306:3306 \
+   --restart always \
+   -e MARIADB_DATABASE=postal \
+   -e MARIADB_ROOT_PASSWORD=postal \
+   mariadb
+   ```
+This will install your postal database on MariaDB.
+
+
 
