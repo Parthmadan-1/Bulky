@@ -37,5 +37,39 @@ sudo hostname postal.xmailing.me
 
 
 
+### Map your domain name.
+```
+Now we have our VPS server and we set its name. Go to your Domain Provider and map your Domain to your VPS server. simply open DNS management zone and add a new A record like this:
 
+host: server points: YOUR SERVER IP.
+```
+
+
+
+## Setup Free SMTP Server
+The VPS is ready, and we can start the installation process. So in order to setup SMTP Server on our VPS, we need to install an SMTP software.
+
+### Install Postal Free SMTP Software
+#### Prerequisites
+Postal runs entirely using containers which means to run Postal you'll need some software to run these containers. We recommend using Docker for this purpose but you can use whatever software you wish.
+
+To install docker, run below commands. (NOTE: Each command starts with a – )
+```
+-sudo apt-get update
+-sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+-echo \
+  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+-sudo apt-get update
+-sudo apt-get install docker-ce docker-ce-cli containerd.io
+-sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+-sudo chmod +x /usr/local/bin/docker-compose
+-docker-compose --version
+```
 
