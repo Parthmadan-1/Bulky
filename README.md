@@ -15,7 +15,7 @@ It's your own server, u can send as much your server can handle in terms of reso
 
 ### Requirements to Setup SMTP Server.
 In order to Build and Setup an SMTP Server, you will mainly need two things:
-A Domain name
+A Domain name.
 VPS Server with port 25 opened.
 
 
